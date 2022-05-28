@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>  
+
+    {% if request.user.is_authenticated  %}
+      <p>Вход выполнен</p>
+      {{request.user}}<br><br>
+      id : <b>{{user.id}}</b><br><br>
+      email : <b>{{user.email}}</b><br><br>
+      username : <b>{{user.username}}</b><br><br>
+      Имя : <b>{{user.first_name}}</b><br><br>
+      Фамилия : <b>{{user.last_name}}</b><br><br>
+      День рождения : <b>{{user.myuser.bday}}</b><br><br>
+      Зашел через: <b>{{user.myuser.authorization_type}}</b><br><br>
+      <a href="{% url 'get_profile' pk=user.id %}">Посмотреть профиль пользователя</a><br>
+      <a href="{% url 'new_credentials' pk=user.id  %}">Изменить логин</a><br>
+      <a href="{% url 'change_password' pk=user.id  %}">Изменить пароль</a><br>
+      <a href="{% url 'change_credential' pk=user.id %}">Изменить пользовательские данные</a><br>
+      <a href="{% url 'social_links' pk=user.id  %}">Ссылки на соцсети</a><br>
+      <a href="{% url 'change_links' pk=1  %}">Изменить ссылки</a><br>
+      <a href="{% url 'create_link' pk=user.id  %}">Добавить ссылку</a><br>      
+      <a href="{% url 'delete' pk=user.id %}">Удалить страницу</a><br>
+      <a href="{% url 'logout' %}">Выйти из профиля</a><br>
+    {% else %}
+      <p>not auth</p>
+      <a href="{% url 'registr' %}">Зарегистрироваться</a><br>
+      <a href="{% url 'get_vk_code' %}">Войти с помощью VK</a><br>
+      <a href="{% url 'login' %}">Войти в аккаунт</a><br>
+    {% endif %}
+    <a href="http://127.0.0.1:8000/admin/">Admin</a>
+    
+</body>
+</html>
